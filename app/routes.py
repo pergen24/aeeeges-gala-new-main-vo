@@ -39,9 +39,9 @@ def elegir_ticket():
 @bp.route('/ticket_image/<ticket_type>')
 def ticket_image(ticket_type):
     images = {
-        "GENERAL": "images/tickets/estandar.jpg",
-        "VIP": "images/tickets/vip.jpg",
-        "INVITADO ESPECIAL": "images/tickets/especial.jpg"
+        "GENERAL 5000fc": "images/tickets/estandar.jpg",
+#        "VIP": "images/tickets/vip.jpg",
+        "CON CARNET DE LA AEEEGS 4000FC": "images/tickets/especial.jpg"
     }
     img_path = images.get(ticket_type.upper())
     if not img_path:
