@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5 text-center">
+    <h2>{{ ticket_type }} - Ticket</h2>
+    <img src="{{ url_for('static', filename=img_path) }}" class="img-fluid rounded shadow mt-3" alt="{{ ticket_type }}">
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+
+      <!-- Título -->
+      <div class="card shadow-lg border-0 rounded-4 mb-4">
+        <div class="card-header bg-dark text-white text-center py-3">
+          <h2 class="mb-0"><i class="bi bi-receipt"></i> Recibos por Revisar</h2>
+        </div>
+        <div class="card-body p-4">
+
+          {% if purchases %}
+            <ul class="list-group">
+              {% for p in purchases %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>#{{ p.id }}</strong> - {{ p.first_name }} {{ p.last_name }}
+                  <span class="badge bg-primary ms-2">{{ p.ticket_type }}</span>
+                  <span class="badge bg-warning text-dark ms-2">{{ p.status }}</span>
+
+                  <!-- Recibos -->
+                  <div class="mt-2">
+                    {% if p.receipt_filename1 %}
+                      <a class="btn btn-outline-info btn-sm me-2" href="{{ url_for('main.uploaded_file', filename=p.receipt_filename1) }}" target="_blank">
+                        Ver recibo 1
+                      </a>
+                    {% endif %}
+                    {% if p.receipt_filename2 %}
+                      <a class="btn btn-outline-info btn-sm" href="{{ url_for('main.uploaded_file', filename=p.receipt_filename2) }}" target="_blank">
+                        Ver recibo 2
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <!-- Acciones del admin -->
+                <div class="d-flex gap-2">
+                  {% if p.status != 'approved' %}
+                    <form action="{{ url_for('main.admin_approve', purchase_id=p.id) }}" method="post" style="display:inline">
+                      <button type="submit" class="btn btn-success btn-sm">
+                        Aprobar y generar PDF
+                      </button>
+                    </form>
+                  {% endif %}
+
+                  <!-- Botón de suspensión -->
+                  <form action="{{ url_for('main.admin_suspend', purchase_id=p.id) }}" method="post" style="display:inline" 
+                        onsubmit="return confirm('¿Seguro que quieres suspender y eliminar este recibo?')">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      Suspender
+                    </button>
+                  </form>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <div class="alert alert-info text-center">
+              <i class="bi bi-info-circle"></i> No hay recibos pendientes.
+            </div>
+          {% endif %}
+
+        </div>
+      </div>
+
+      <!-- Enlace volver -->
+      <div class="text-center">
+        <a href="{{ url_for('main.admin_index') }}" class="btn btn-secondary shadow-sm">
+          <i class="bi bi-arrow-left-circle"></i> Volver al Panel Admin
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

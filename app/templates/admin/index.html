@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Panel Admin - Todas las Compras</h1>
+
+{% if purchases %}
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Ticket</th>
+            <th>Status</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in purchases %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.first_name }} {{ p.last_name }}</td>
+            <td>{{ p.email }}</td>
+            <td>{{ p.ticket_type }}</td>
+            <td>{{ p.status }}</td>
+            <td>
+                {% if p.receipt_filename %}
+                    <a href="{{ url_for('main.uploaded_file', filename=p.receipt_filename) }}" target="_blank">Ver recibo</a>
+                {% endif %}
+                {% if p.status != 'approved' %}
+                    <form action="{{ url_for('main.admin_approve', purchase_id=p.id) }}" method="post" style="display:inline">
+                        <button type="submit">Aprobar y generar PDF</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay compras registradas.</p>
+{% endif %}
+
+<p><a href="{{ url_for('main.admin_recibos') }}">Ver Recibos Pendientes</a></p>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="mb-4 text-center">Elige tu tipo de ticket</h2>
+  <div class="row justify-content-center">
+    {% for t in ticket_types %}
+      <div class="col-md-4 mb-4 d-flex align-items-stretch">
+        <a href="{{ url_for('main.checkout', ticket_type=t['name']) }}" class="w-100">
+          <div class="card shadow-lg border-0 h-100">
+            <img src="{{ url_for('static', filename=t['image']) }}" 
+                 class="card-img-top img-fluid rounded mx-auto d-block" 
+                 alt="{{ t['name'] }}" 
+                 style="max-height: 300px; object-fit: cover;">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ t['name'] }}</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

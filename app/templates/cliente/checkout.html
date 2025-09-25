@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container my-5 position-relative">
+
+  <!-- Bloque de soporte arriba a la derecha -->
+  <div class="support-box position-absolute top-0 end-0 p-3 text-end bg-light rounded shadow-sm">
+    <p class="mb-1"><strong>En caso de problemas, contáctanos:</strong></p>
+    <p class="mb-0">Admin: visionalfa</p>
+    <p class="mb-0">Num: <a href="tel:+221775542015">+221 77 554 20 15</a></p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="row g-4">
+
+        <!-- Formulario a la izquierda -->
+        <div class="col-md-6">
+          <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-header bg-primary text-white text-center py-3">
+              <h2 class="mb-0">Checkout - {{ ticket_type }}</h2>
+            </div>
+            <div class="card-body p-4">
+              <form method="post" class="row g-3">
+
+                <div class="col-md-6">
+                  <label for="first_name" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="first_name" name="first_name" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="last_name" class="form-label">Apellidos</label>
+                  <input type="text" class="form-control" id="last_name" name="last_name" required>
+                </div>
+
+                <div class="col-12">
+                  <label for="email" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                  <div id="email-suggestion" class="text-danger small mt-1"></div>
+                </div>
+
+                <div class="col-12">
+                  <label for="address" class="form-label">Dirección</label>
+                  <input type="text" class="form-control" id="address" name="address">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="city" class="form-label">Ciudad</label>
+                  <input type="text" class="form-control" id="city" name="city">
+                </div>
+
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Teléfono</label>
+                  <input type="text" class="form-control" id="phone" name="phone">
+                </div>
+
+                <div class="col-12 d-grid">
+                  <button type="submit" class="btn btn-success btn-lg shadow-sm">
+                    Continuar y subir comprobante después
+                  </button>
+                </div>
+              </form>
+
+              <div class="alert alert-info mt-4" role="alert">
+                <i class="bi bi-info-circle-fill"></i>
+                Nota: La transferencia se realiza de manera externa; deberás subir el recibo en la siguiente página, llama +221775542015 en caso de algo.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caja IBAN a la derecha -->
+        <div class="col-md-6">
+          <div class="iban-box shadow-lg p-4 rounded text-center h-100 d-flex flex-column justify-content-center">
+            <h2><i class="bi bi-credit-card-2-front"></i> Pago por transferencia Orange Money o WAVE</h2>
+            <p class="fw-bold mt-3">PERGENTINO MEMBILA MBASI</p>
+            <p class="fs-5">NUMERO: <span class="text-warning">+221 77 554 20 15</span></p>
+            <p class="small text-secondary mt-2">Realiza la transferencia a este número y guarda el comprobante para subirlo después.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mailcheck.js para sugerencias de correos -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js"></script>
+<script>
+document.getElementById("email").addEventListener("blur", function() {
+  var email = this.value;
+  Mailcheck.run({
+    email: email,
+    domains: ["gmail.com", "outlook.com", "hotmail.com", "yahoo.com", "protonmail.com", "icloud.com"],
+    suggested: function(suggestion) {
+      document.getElementById("email-suggestion").innerText =
+        "¿Quisiste decir: " + suggestion.full + " ?";
+    },
+    empty: function() {
+      document.getElementById("email-suggestion").innerText = "";
+    }
+  });
+});
+</script>
+
+<style>
+  /* Ajuste del bloque de soporte */
+  .support-box {
+    max-width: 220px;
+    font-size: 0.9rem;
+  }
+</style>
+
+{% endblock %}

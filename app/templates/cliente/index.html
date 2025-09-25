@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Imagen principal de la Gala -->
+<div class="image-container text-center my-4">
+  <img src="{{ url_for('static', filename='images/fiesta.jpg') }}" 
+       alt="Gran Gala de la Independencia 2025" 
+       class="img-fluid rounded shadow"
+       style="max-width: 100%; height: auto;">
+</div>
+{% endblock %}

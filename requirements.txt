@@ -1,0 +1,14 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+psycopg2-binary
+qrcode
+Pillow
+reportlab
+python-dotenv
+Werkzeug
+Flask-Mail
+dnspython
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    environment:
+      - FLASK_APP=manage.py
+      - FLASK_ENV=production
+      - DATABASE_URL=postgresql+psycopg2://neondb_owner:npg_mUPGMj0O5eyq@ep-green-boat-adjdm91u-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+      - UPLOAD_FOLDER=/app/uploads
+      - SECRET_KEY=tu_secret_key
+      - MAIL_USERNAME=membilambasipergentino@gmail.com
+      - MAIL_PASSWORD=euwnlfxmgfcpseeh
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+      - ./uploads:/app/uploads
+    entrypoint: /app/entrypoint.sh
