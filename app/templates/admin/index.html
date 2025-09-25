@@ -10,6 +10,7 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
+            <th>Teléfono</th>
             <th>Ticket</th>
             <th>Status</th>
             <th>Acciones</th>
@@ -21,6 +22,7 @@
             <td>{{ p.id }}</td>
             <td>{{ p.first_name }} {{ p.last_name }}</td>
             <td>{{ p.email }}</td>
+            <td>{{ p.phone or "N/A" }}</td>
             <td>{{ p.ticket_type }}</td>
             <td>{{ p.status }}</td>
             <td>
