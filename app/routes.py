@@ -29,9 +29,9 @@ def index():
 @bp.route('/elegir')
 def elegir_ticket():
     ticket_types = [
-        {"name": "GENERAL 5000fc", "image": "images/tickets/estandar.jpg"},
+        {"name": "GENERAL 5000", "image": "images/tickets/estandar.jpg"},
 #        {"name": "VIP", "image": "images/tickets/vip.jpg"},
-        {"name": "CON CARNET DE LA AEEEGS 4000fc", "image": "/images/tickets/especial.jpg"}
+        {"name": "CON CARNET DE LA AEEEGS 4000", "image": "/images/tickets/especial.jpg"}
     ]
     return render_template('cliente/elegir_ticket.html', ticket_types=ticket_types)
 
@@ -39,9 +39,9 @@ def elegir_ticket():
 @bp.route('/ticket_image/<ticket_type>')
 def ticket_image(ticket_type):
     images = {
-        "GENERAL 5000fc": "images/tickets/estandar.jpg",
+        "GENERAL 5000": "images/tickets/estandar.jpg",
 #        "VIP": "images/tickets/vip.jpg",
-        "CON CARNET DE LA AEEEGS 4000FC": "images/tickets/especial.jpg"
+        "CON CARNET DE LA AEEEGS 4000": "images/tickets/especial.jpg"
     }
     img_path = images.get(ticket_type.upper())
     if not img_path:
